@@ -81,20 +81,19 @@ public class ProjetoAG {
         
         calculaAptidao(populacao);
         int melhorIndice = getMelhorIndice();
+        System.out.println("Melhor indice: " + melhorIndice);
 
         //copia o valor das tarefas e a melhor linha
         for (int i = 0; i < tarefas; i++) {
             populacaoIntermediaria[0][i] = populacao[0][i];
             populacaoIntermediaria[1][i] = populacao[melhorIndice][i];
         }
-        
-        System.out.println("---------------\n" + populacaoIntermediariaToString());
               
         //popula o resto da população por torneio e cruzamento uniponto
-        for (int i = 2; i < pop; i++) {
+        for (int i = 2; i < pop-1; i++) {
             int indiceMae = selecaoPorTorneio();
             int indicePai = selecaoPorTorneio();            
-            cruzamentoUniPonto(indicePai, indiceMae, i-1);
+            cruzamentoUniPonto(indicePai, indiceMae, i);
         }
     }
 
@@ -114,8 +113,11 @@ public class ProjetoAG {
 
     public int selecaoPorTorneio() {
         Random geraIndice = new Random();
-        int indice1 = geraIndice.nextInt(pop-2) + 2;
-        int indice2 = geraIndice.nextInt(pop-2) + 2;
+        int indice1 = geraIndice.nextInt(pop-1) +1;
+        int indice2 = geraIndice.nextInt(pop-1) +1;
+        
+        //System.out.println("I1: " + indice1 + " I2: " +indice2);
+        
         if (aptidao[indice1] > aptidao[indice2]) {
             return indice1;
         }
@@ -161,25 +163,22 @@ public class ProjetoAG {
         int geracoes = 0;
         boolean convergiu = false;
         
+        Random r = new Random();
+        
         inicializaPopulacao();            
         
-        for(int i = 0; i < maxGeracoes; i++){
+        for(int i = 0; i < maxGeracoes; i++){            
+            System.out.println("Geração: " + geracoes); 
+            System.out.println(aptidaoToString());
+            geraPopulacaoIntermediaria();               
             
-            System.out.println("Geração: " + geracoes);
+            if(r.nextInt(4) == 1){
+                mutacao();
+            }
             
-            geraPopulacaoIntermediaria(); 
-            
-            Thread.sleep(200);
-            
-            populacao = populacaoIntermediaria;
-            
-            System.out.println(populacaoToString());
-            
-            Thread.sleep(200);
-            
-            System.out.println(aptidaoToString());       
-            
-            Thread.sleep(200);
+            populacao = populacaoIntermediaria;  
+            calculaAptidao(populacao);
+           
             System.out.println(populacaoIntermediariaToString());
             geracoes++;
             

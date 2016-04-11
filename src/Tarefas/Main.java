@@ -11,10 +11,10 @@ package Tarefas;
  */
 public class Main {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         ProjetoAG p = new ProjetoAG();
         
-        p.algoritmoGenetico(2);
+        p.algoritmoGenetico(5);
         
         
     }
