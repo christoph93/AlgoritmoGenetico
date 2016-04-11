@@ -14,17 +14,10 @@ public class Main {
     public static void main(String[] args) {
         ProjetoAG p = new ProjetoAG();
         
-        System.out.println(p.toString());
-        
-     
-        
-        p.inicializaPopulacaoIntermediaria();
-        
-        System.out.println("");
-        
-        System.out.println(p.toString2());
+        p.inicializaPopulacao();       
         
         
+        p.algoritmoGenetico(2);
         
         
     }
