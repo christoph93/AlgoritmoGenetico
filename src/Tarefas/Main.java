@@ -14,9 +14,6 @@ public class Main {
     public static void main(String[] args) {
         ProjetoAG p = new ProjetoAG();
         
-        p.inicializaPopulacao();       
-        
-        
         p.algoritmoGenetico(2);
         
         

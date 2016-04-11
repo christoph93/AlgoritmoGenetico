@@ -16,7 +16,6 @@ public class ProjetoAG {
     private Integer[][] populacao;
     private Integer[][] populacaoIntermediaria;
     private int pop, rainhas, tamanho, tarefas;
-    private Character[][] tabuleiro;
     private double aptidao[];
     
     
@@ -65,7 +64,7 @@ public class ProjetoAG {
     
     public int getMelhorIndice(){        
         double menorDes = aptidao[1];
-        int melhorIndice = 0;
+        int melhorIndice = 1;
         
         for (int i = 1; i < aptidao.length; i++) {
             if (aptidao[i] < menorDes) {
@@ -89,8 +88,8 @@ public class ProjetoAG {
             populacaoIntermediaria[1][i] = populacao[melhorIndice][i];
         }
         
-        System.out.println(populacaoIntermediariaToString());
-
+        System.out.println("---------------\n" + populacaoIntermediariaToString());
+              
         //popula o resto da população por torneio e cruzamento uniponto
         for (int i = 2; i < pop; i++) {
             int indiceMae = selecaoPorTorneio();
@@ -145,7 +144,7 @@ public class ProjetoAG {
         return msg;
     }
     
-    public String apridaoToString(){
+    public String aptidaoToString(){
         String msg = "Aptidao: \n";
         
         for(Double i : aptidao){
@@ -156,29 +155,32 @@ public class ProjetoAG {
     }
 
 
-    public void algoritmoGenetico(int maxGeracoes) {
+    public void algoritmoGenetico(int maxGeracoes) throws InterruptedException {
         System.out.println("Iniciando AG");
         
         int geracoes = 0;
         boolean convergiu = false;
         
-        inicializaPopulacao(); 
-        
-        System.out.println(populacaoToString());
+        inicializaPopulacao();            
         
         for(int i = 0; i < maxGeracoes; i++){
             
             System.out.println("Geração: " + geracoes);
             
-            geraPopulacaoIntermediaria();            
+            geraPopulacaoIntermediaria(); 
+            
+            Thread.sleep(200);
+            
             populacao = populacaoIntermediaria;
             
             System.out.println(populacaoToString());
-            System.out.println(apridaoToString());
             
+            Thread.sleep(200);
             
-            System.out.println("\n"+populacaoIntermediariaToString());
+            System.out.println(aptidaoToString());       
             
+            Thread.sleep(200);
+            System.out.println(populacaoIntermediariaToString());
             geracoes++;
             
         }
@@ -209,20 +211,4 @@ public class ProjetoAG {
         populacaoIntermediaria[indCrom][indRainha2] = aux;
 
     }
-
-    public void copiaMelhor(int i) {
-        populacaoIntermediaria[0] = populacao[i].clone();
-    }
-
-    public String exibePopulacaoIntermediaria() {
-        String msg = "";
-        for (int i = 0; i < tamanho; i++) {
-            for (int j = 0; j < rainhas; j++) {
-                msg = msg + populacaoIntermediaria[i][j] + " ";
-            }
-            msg = msg + "\n";
-        }
-        return msg;
-    }
-
 }
