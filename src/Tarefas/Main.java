@@ -12,8 +12,13 @@ package Tarefas;
 public class Main {
     
     public static void main(String[] args) throws InterruptedException {
-        ProjetoAG p = new ProjetoAG(20,100, 20, 5);
         
+        
+        //parametros: tamanho da população, número de tarefas, probabilidade(1 em n), mudanças por mutação, porcentagem mínima para convergir (0 a 1);
+        ProjetoAG p = new ProjetoAG(20, 100, 10, 5, 0.9);
+        
+        
+        //parametros: max gerações.
         p.algoritmoGenetico(100);
         
         

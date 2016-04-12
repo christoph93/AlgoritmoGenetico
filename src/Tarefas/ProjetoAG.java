@@ -16,13 +16,15 @@ public class ProjetoAG {
     private Integer[][] populacao;
     private Integer[][] populacaoIntermediaria;
     private int pop, rainhas, tamanho, tarefas, mutacoes, probMut;
+    private double conv;
     private double aptidao[];
 
-    public ProjetoAG(int pop, int tarefas, int mutacoes, int probMut) {
+    public ProjetoAG(int pop, int tarefas, int mutacoes, int probMut, double conv) {
         this.pop = pop;
-        this.tarefas = 100;
-        this.mutacoes = mutacoes;
+        this.tarefas = tarefas;
+        this.mutacoes = mutacoes;        
         this.probMut = probMut;
+        this.conv = conv;
         populacao = new Integer[pop][tarefas];
         aptidao = new double[pop];
     }
@@ -200,7 +202,7 @@ public class ProjetoAG {
             for(Double d : aptidao){
                 if(d == menorApt){
                     cont++;
-                    if(cont >= aptidao.length -3){
+                    if(cont >= aptidao.length * conv){
                         convergiu = true;
                     }
                 }                  
