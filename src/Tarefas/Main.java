@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         ProjetoAG p = new ProjetoAG();
         
-        p.algoritmoGenetico(5);
+        p.algoritmoGenetico(100);
         
         
     }
