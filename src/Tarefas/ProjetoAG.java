@@ -15,12 +15,14 @@ public class ProjetoAG {
 
     private Integer[][] populacao;
     private Integer[][] populacaoIntermediaria;
-    private int pop, rainhas, tamanho, tarefas;
+    private int pop, rainhas, tamanho, tarefas, mutacoes, probMut;
     private double aptidao[];
 
-    public ProjetoAG() {
-        pop = 21;
-        tarefas = 100;
+    public ProjetoAG(int pop, int tarefas, int mutacoes, int probMut) {
+        this.pop = pop;
+        this.tarefas = 100;
+        this.mutacoes = mutacoes;
+        this.probMut = probMut;
         populacao = new Integer[pop][tarefas];
         aptidao = new double[pop];
     }
@@ -182,8 +184,8 @@ public class ProjetoAG {
             System.out.println(aptidaoToString());
             geraPopulacaoIntermediaria();
 
-            if(r.nextInt(20) == 1){
-                mutacao(100);
+            if(r.nextInt(probMut) == 1){
+                mutacao(mutacoes);
                 System.out.println("MUTAÇÃO!");
             }
             System.out.println(populacaoIntermediariaToString());
